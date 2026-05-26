@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "Walter Sophia",
+  description: "No Fee Direct Sourcing — we source products worldwide, every step of the way.",
+  icons: { icon: "/seo/favicon.png" },
 };
 
 export default function RootLayout({
