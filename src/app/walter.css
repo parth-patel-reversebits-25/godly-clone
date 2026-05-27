@@ -91,6 +91,9 @@ html.lenis, html.lenis body { height: auto; }
 .ws .hero-section .text-block h1 { font-family: "GothamLight"; font-size: 80px; }
 .ws .section-1 { padding: 270px 0 1000px; }
 .ws .section-1 .text-block { text-align: center; }
+/* place blocks collapse to padding-only height without this (content excluded from flow height),
+   shrinking section-2 ~400px and pulling sections 3-7 up into the winding-line path. */
+.ws .section-2 .text-block { height: auto; }
 .ws .section-2 .text-block.l-block { padding-left: 90px; text-align: left; }
 .ws .section-2 .text-block.c-block { text-align: center; }
 .ws .section-2 .text-block.r-block { padding-right: 90px; text-align: right; }
