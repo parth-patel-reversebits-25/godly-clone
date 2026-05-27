@@ -10,6 +10,12 @@
 @font-face { font-family: "GothamBook"; src: url(/fonts/GothamBook.woff2) format("woff2"); }
 @font-face { font-family: "GothamBold"; src: url(/fonts/GothamBold.woff2) format("woff2"); }
 
+/* lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 /* base */
 .ws *,
 .ws *::after,

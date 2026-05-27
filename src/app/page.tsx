@@ -3,10 +3,12 @@
 import "./walter.css";
 import { Nav } from "@/components/Nav";
 import { AnimatedSvg } from "@/components/AnimatedSvg";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
     <div className="ws" id="what">
+      <SmoothScroll />
       <Nav />
 
       <div id="main">
@@ -17,7 +19,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-12">
                   <div className="ilustration">
-                    <AnimatedSvg name="trigger1" duration={6} stagger={0.04} />
+                    <AnimatedSvg name="trigger1" scrub />
                   </div>
                 </div>
               </div>
