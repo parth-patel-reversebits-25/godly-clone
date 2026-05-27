@@ -73,6 +73,12 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
+
+  /* minimal-scrollbar tokens */
+  --scrollbar-size: 6px;
+  --scrollbar-thumb: #6b5a4a;
+  --scrollbar-thumb-hover: #574a3c;
+  --scrollbar-track: transparent;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -126,5 +132,49 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/*
+ * .minimal-scrollbar — slim, rounded, warm-brown vertical scrollbar.
+ * Hides horizontal scrollbar. Works on full-page, modal, sidebar, custom containers.
+ * Apply to any overflow container; for full-page apply to <html> or <body>.
+ */
+@layer utilities {
+  .minimal-scrollbar {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* WebKit / Blink (Chrome, Edge, Safari) */
+  .minimal-scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: 0; /* hide horizontal */
+  }
+
+  .minimal-scrollbar::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  .minimal-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 999px;
+    /* consistent gap from edge without resizing thumb */
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.2s ease;
+  }
+
+  .minimal-scrollbar:hover::-webkit-scrollbar-thumb,
+  .minimal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
+  /* no arrows/buttons */
+  .minimal-scrollbar::-webkit-scrollbar-button {
+    display: none;
   }
 }

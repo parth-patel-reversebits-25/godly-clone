@@ -83,7 +83,10 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
         const scrollable = rect.height - vh;
         const raw = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
         // front-load: first ~half draws faster, then eases back to normal pace.
-        const p = raw < 0.5 ? raw * 1.5 : 0.75 + (raw - 0.5) * 0.5;
+        const shaped = raw < 0.5 ? raw * 1.5 : 0.75 + (raw - 0.5) * 0.5;
+        // slow the draw ~10% relative to scroll so lines lag the page a touch,
+        // but keep reaching full draw (1.0) at the end so the last lines finish.
+        const p = Math.pow(shaped, 1.1);
         if (p !== last) {
           last = p;
           items.forEach(({ el, len }, i) => {
