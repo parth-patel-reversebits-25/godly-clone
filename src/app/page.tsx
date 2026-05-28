@@ -187,7 +187,7 @@ export default function Home() {
                     <div className="column-block" id="service">
                       <div className="info-block" id="contact">
                         <div className="svg-holder">
-                          <AnimatedSvg name="fifth-waypoint" />
+                          <AnimatedSvg name="fifth-waypoint" duration={0.8} stagger={0.03} />
                         </div>
                         <AnimatedSvg name="sixth-waypoint" />
                         <h3>Let&apos;s Talk</h3>
