@@ -140,7 +140,8 @@ html.lenis, html.lenis body { height: auto; }
 .ws .section-10 .form-block .form-holder .input-holder input[type=submit]:hover { background-color: #fff; color: #000; }
 .ws footer { padding: 40px 0; display: block; }
 .ws footer .logo-holder { text-align: center; }
-.ws footer .logo-holder img { max-height: 77px; }
+.ws footer .logo-holder a { display: inline-block; }
+.ws footer .logo-holder img { max-height: 77px; display: block; margin: 0 auto; }
 .ws .the-image svg { max-width: 100%; height: auto; }
 
 /* desktop shows big winding line; per-section small illustrations hidden. reversed on mobile. */
