@@ -43,13 +43,19 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
         } catch {
           len = 0;
         }
-        if (!len) {
+        let y0 = 0;
+        let y1 = 0;
+        try {
           const b = el.getBBox();
-          len = (b.width + b.height) * 2 || 1000;
+          if (!len) len = (b.width + b.height) * 2 || 1000;
+          y0 = b.y;
+          y1 = b.y + b.height;
+        } catch {
+          if (!len) len = 1000;
         }
         el.style.strokeDasharray = `${len}`;
         el.style.strokeDashoffset = `${len}`;
-        return { el, len, i };
+        return { el, len, y0, y1, i };
       });
 
     if (scrub) {
@@ -57,15 +63,23 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
       items.forEach(({ el }) => {
         el.style.transition = "none";
       });
-      // sequence the lines by cumulative length so the whole illustration draws as ONE
-      // continuous stroke (top -> bottom). Without this, Path1's undrawn tail and Path2's
-      // drawn head overlap near section-3 and leave a visible gap.
-      const totalLen = items.reduce((s, it) => s + it.len, 0) || 1;
-      let acc = 0;
+      // Map each element's draw window to its VERTICAL position in the illustration,
+      // not to draw order or arc length. This makes the line track scroll by construction:
+      // a path draws while the scroll crosses the band of the page where it physically
+      // sits. The two giant winding strokes each span ~half the height, so they draw
+      // slowly across half the scroll; the small markers draw quickly as you reach them.
+      // Earlier length/order sequencing drew middle markers, then the top line, then the
+      // bottom line — out of vertical order, which looked broken.
+      const ys = items.flatMap((it) => [it.y0, it.y1]);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
+      const spanY = maxY - minY || 1;
+      const norm = (y: number) => (y - minY) / spanY;
+      // floor each window so flat (zero-height) markers still draw fully instead of
+      // stalling — they snap on quickly once the scroll reaches their band.
       const ranges = items.map((it) => {
-        const start = acc / totalLen;
-        acc += it.len;
-        return { start, end: acc / totalLen };
+        const start = norm(it.y0);
+        return { start, end: Math.max(norm(it.y1), start + 0.02) };
       });
       // Anchor progress to the SECTION the line lives in, not the giant svg itself.
       // Using the svg's own rect saturates the math at load (the svg is taller than the
@@ -82,11 +96,11 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
         // hitting the top of the screen to its bottom leaving the bottom.
         const scrollable = rect.height - vh;
         const raw = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
-        // front-load: first ~half draws faster, then eases back to normal pace.
-        const shaped = raw < 0.5 ? raw * 1.5 : 0.75 + (raw - 0.5) * 0.5;
+        // linear track: speed now follows scroll evenly. Per-segment pacing comes from
+        // the weighted `ranges` above, not from reshaping global progress.
         // slow the draw ~10% relative to scroll so lines lag the page a touch,
         // but keep reaching full draw (1.0) at the end so the last lines finish.
-        const p = Math.pow(shaped, 1.1);
+        const p = Math.pow(raw, 1.1);
         if (p !== last) {
           last = p;
           items.forEach(({ el, len }, i) => {
