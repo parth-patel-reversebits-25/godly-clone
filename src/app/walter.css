@@ -144,7 +144,8 @@ html.lenis, html.lenis body { height: auto; }
 .ws footer .logo-holder img { max-height: 77px; display: block; margin: 0 auto; }
 .ws .the-image svg { max-width: 100%; height: auto; }
 
-/* desktop shows big winding line; per-section small illustrations hidden. reversed on mobile. */
+/* per-section small illustrations hidden at every width — matches reference, which keeps
+   them sf-hidden on mobile/tablet and shows only the winding line on desktop. */
 .ws .the-image.small-media { display: none; }
 
 @media (max-width:1199.98px) {
@@ -164,7 +165,6 @@ html.lenis, html.lenis body { height: auto; }
   .ws .info-block { text-align: center; }
   .ws .section-9 .columns .column-block.first-block { margin-top: 0; }
   .ws .wrapper .ilustration-holder { display: none; }
-  .ws .the-image.small-media { display: block; text-align: center; margin: 0 auto; }
   .ws .hero-section .text-block h1 { font-size: 48px; }
   .ws .section-1 { padding: 50px 0; }
   .ws .section-1 .text-block { padding-bottom: 45px; }
