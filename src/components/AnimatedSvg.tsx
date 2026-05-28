@@ -109,8 +109,15 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
           items.forEach(({ el, len, y0 }, i) => {
             const { start, end } = ranges[i];
             const isComplex = len > LONG_LINE_LEN;
-            const p = isComplex ? pFast : pTrack;
-            let local = Math.min(1, Math.max(0, (p - start) / (end - start || 1)));
+            // hero complex (y0 < 0) races ahead to finish on screen; the lower complex
+            // (y0 >= 0) stays scroll-locked so it lags with the page through the steps.
+            const p = isComplex && y0 < 0 ? pFast : pTrack;
+            // straight strokes after the "It Starts with Discovery" section (svg y0 >= 1300,
+            // the lower radiating burst) draw over a wider scroll window so they reveal
+            // slowly instead of snapping on as the scroll reaches their band.
+            const SLOW_WINDOW = 0.16;
+            const span = !isComplex && y0 >= 1300 ? Math.max(end - start, SLOW_WINDOW) : end - start || 1;
+            let local = Math.min(1, Math.max(0, (p - start) / span));
             // Long sweeping strokes pack a lot of (mostly horizontal) arc length into a
             // small vertical band, so their pen-tip races across the screen right after it
             // starts. Ease-in their local progress: the opening sweep crawls, then it
@@ -118,7 +125,7 @@ export function AnimatedSvg({ name, className, duration = 2.4, stagger = 0.12, s
             // The lower complex stroke (y0 >= 0, the Shanghai -> "every step" sweep)
             // races too far ahead there, so give it a steeper ease to lag closer to scroll.
             if (isComplex) {
-              const LONG_EASE = y0 >= 0 ? 2.8 : 1.8;
+              const LONG_EASE = y0 >= 0 ? 2.4 : 1.8;
               local = Math.pow(local, LONG_EASE);
             }
             el.style.strokeDashoffset = `${len * (1 - local)}`;
