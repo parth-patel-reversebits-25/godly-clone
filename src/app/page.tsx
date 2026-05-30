@@ -205,7 +205,7 @@ export default function Home() {
           <section className="section-11" id="contact">
             <div className="container">
               <div className="row">
-                <div className="col-lg-6 offset-lg-6">
+                <div className="col-12 col-xl-6 offset-xl-6">
                   <div className="info-block">
                     <div className="svg-holder">
                       <AnimatedSvg name="sixth-waypoint" />
