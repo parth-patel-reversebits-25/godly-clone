@@ -122,6 +122,9 @@ html.lenis, html.lenis body { height: auto; }
 .ws .section-9 .columns .column-block.first-block { margin-top: 200px; }
 .ws .section-9 .columns .column-block .svg-holder { width: 100%; margin-bottom: 50px; text-align: center; }
 .ws .section-9 .columns .column-block .svg-holder svg { max-width: 100%; height: auto; }
+@media (max-width:1023.98px) {
+  .ws .section-9 .columns .column-block .svg-holder svg { display: block; margin: 0 auto; }
+}
 .ws .section-9 .columns .column-block h3 { margin: 0 0 30px; }
 .ws .section-11 { padding: 0 0 120px; }
 .ws .info-block { text-align: center; }
