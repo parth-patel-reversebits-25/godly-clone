@@ -161,7 +161,7 @@ html.lenis, html.lenis body { height: auto; }
 .ws .section-10 .form-block .form-holder .input-holder input[type=email],
 .ws .section-10 .form-block .form-holder .input-holder input[type=tel] { width: 100%; height: 50px; padding: 0 15px; border: 1px solid #000; border-radius: 4px; color: #000; font-size: 16px; }
 .ws .section-10 .form-block .form-holder .input-holder textarea { width: 100%; height: 150px; padding: 10px 15px; border: 1px solid #000; border-radius: 4px; color: #000; font-size: 16px; resize: none; }
-.ws .section-10 .form-block .form-holder .input-holder input[type=submit] { display: block; width: 100%; max-width: 176px; height: 50px; margin: 0 auto; background-color: #000; border: 1px solid #000; border-radius: 4px; color: #fff; font-size: 16px; font-family: "GothamBold"; letter-spacing: 2.8px; text-transform: uppercase; transition: all .3s ease; }
+.ws .section-10 .form-block .form-holder .input-holder input[type=submit] { display: block; width: 100%; max-width: 176px; height: 50px; margin: 0 auto; background-color: #000; border: 1px solid #000; border-radius: 4px; color: #fff; font-size: 16px; font-family: "GothamBold"; letter-spacing: 2.8px; text-transform: uppercase; cursor: pointer; transition: all .3s ease; }
 .ws .section-10 .form-block .form-holder .input-holder input[type=submit]:hover { background-color: #fff; color: #000; }
 .ws footer { padding: 40px 0; display: block; }
 .ws footer .logo-holder { text-align: center; }
