@@ -4,6 +4,7 @@ import "./walter.css";
 import { Nav } from "@/components/Nav";
 import { AnimatedSvg } from "@/components/AnimatedSvg";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Mail, Phone } from "lucide-react";
 
 export default function Home() {
   return (
@@ -184,29 +185,63 @@ export default function Home() {
                       </p>
                     </Why>
 
-                    <div className="column-block" id="service">
-                      <div className="info-block" id="contact">
-                        <div className="svg-holder">
-                          <AnimatedSvg name="fifth-waypoint" duration={0.8} stagger={0.03} />
-                        </div>
-                        <AnimatedSvg name="sixth-waypoint" />
-                        <h3>Let&apos;s Talk</h3>
-                        <p>
-                          Want to learn more?
-                          <br />
-                          Or maybe you just need someone to talk to.
-                          <br />
-                          Either way we are here, and on your terms.
-                        </p>
-                        <p>Call us, text us, or send us a good old fashioned email.</p>
-                        <p>
-                          <a href="tel:+12125539399">(212) 553-9399</a>
-                          <a className="c-btn" href="mailto:hello@waltersophia.com">
-                            Email Us
-                          </a>
-                        </p>
-                      </div>
+                    <Why id="service" svg="fifth-waypoint" title="Personalized Service">
+                      <p>
+                        Business is personal. We take the time to learn about each of our clients&rsquo; businesses,
+                        their values, and their goals. Partnering with the right manufacturer is vital when creating or
+                        sourcing a new product.
+                      </p>
+                      <p>
+                        We don&rsquo;t want any friction between our clients and their partners; this is a core value of
+                        our firm. We don&rsquo;t hire account executives &mdash; and we never will.
+                      </p>
+                    </Why>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="section-11" id="contact">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-6 offset-lg-6">
+                  <div className="info-block">
+                    <div className="svg-holder">
+                      <AnimatedSvg name="sixth-waypoint" />
                     </div>
+                    <h3>Let&apos;s Talk</h3>
+                    <p>
+                      Want to learn more?
+                      <br />
+                      Or maybe you just need someone to talk to.
+                      <br />
+                      Either way we are here, and on your terms.
+                    </p>
+                    <p>Call us, text us, or send us a good old fashioned email.</p>
+                    <p>
+                      <a href="mailto:hello@waltersophia.com">hello@waltersophia.com</a>
+                      <span className="info-icon" aria-hidden>
+                        <Mail size={20} strokeWidth={2.5} fill="currentColor" />
+                      </span>
+                    </p>
+                    <p>
+                      <a href="tel:+17025539399">(702) 553-9399</a>
+                      <span className="info-icon" aria-hidden>
+                        <Phone size={20} strokeWidth={2.5} fill="currentColor" />
+                      </span>
+                    </p>
+                    <p className="btn-row">
+                      <a className="c-btn" href="sms:+17025539399">
+                        Text Us
+                      </a>
+                      <a className="c-btn" href="tel:+17025539399">
+                        Call Us
+                      </a>
+                      <a className="c-btn" href="mailto:hello@waltersophia.com">
+                        Email Us
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>
