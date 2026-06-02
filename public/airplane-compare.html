@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>cmp</title>
+<style>
+  body{margin:0;padding:24px;font-family:system-ui;background:#fafafa;display:flex;gap:24px;align-items:flex-start}
+  .col{background:#fff;border:1px solid #ddd;padding:16px;width:360px;text-align:center}
+  .col h3{margin:0 0 12px;font-size:14px;font-weight:600}
+  .box{background:#fff;border:1px dashed #ccc;height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .box img{max-width:100%;max-height:100%;object-fit:contain}
+  svg{display:block}
+</style>
+</head>
+<body>
+  <div class="col">
+    <h3>Reference (image #6)</h3>
+    <div class="box"><img src="/ref-airplane.png" alt="reference"/></div>
+  </div>
+  <div class="col">
+    <h3>My SVG</h3>
+    <div class="box">
+      <svg viewBox="-5 0 140 100" width="220" fill="none" stroke="#000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 95 L128 18 L108 32 L125 22 L122 70 Z" />
+        <path d="M5 95 L108 32" />
+        <path d="M5 95 L122 70" />
+        <path d="M5 95 L88 60" />
+        <path d="M50 82 L108 32" />
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

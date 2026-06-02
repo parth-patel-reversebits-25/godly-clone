@@ -370,14 +370,10 @@ function DistributionTail() {
             the line clearly comes down from the rocket trail), sweeps right
             with a gentle wave and small loop, then arrives at the airplane */}
         <path d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 250, 980 268, 1060 260" />
-        {/* paper airplane at end */}
-        <g transform="translate(1055 200)">
-          <path d="M2 65 L150 6 L92 60 L130 110 Z" />
-          <path d="M2 65 L92 60" />
-          <path d="M92 60 L150 6" />
-          <path d="M92 60 L130 110" />
-          <path d="M92 60 L78 78" />
-        </g>
+        {/* paper airplane — pointy nose lower-left, long top edge sloping
+            up-right to small notch and tail fin, right wing back-bottom, with
+            multiple fold lines fanning from nose to give the layered look */}
+        <image href="/airplane.png" x="974" y="174" width="150" height="109" />
       </svg>
     </div>
   );

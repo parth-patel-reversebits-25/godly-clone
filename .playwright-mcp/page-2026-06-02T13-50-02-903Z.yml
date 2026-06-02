@@ -1,0 +1,7 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - 'heading "Reference (image #6)" [level=3] [ref=e3]'
+    - img "reference" [ref=e5]
+  - generic [ref=e6]:
+    - heading "My SVG" [level=3] [ref=e7]
+    - img [ref=e9]
