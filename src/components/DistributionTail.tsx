@@ -77,16 +77,16 @@ export function DistributionTail() {
           </filter>
         </defs>
 
-        {/* Winding tail line */}
+        {/* Winding tail line ending exactly at the airplane's bottom-left nose tip (968, 302) */}
         <path
           ref={pathRef}
-          d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 252, 980 280, 1060 296"
+          d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 252, 940 285, 968 302"
         />
 
-        {/* Beautiful, sketched paper airplane that matches reference style perfectly. 
-            Uses scaling around connection anchor point (1060, 296) for absolute precision. */}
+        {/* Sketched paper airplane aligned perfectly. 
+            Scaling transform centered around connection anchor point (968, 302) for absolute precision. */}
         <g
-          transform={`translate(1060, 296) scale(${airplaneScale}) translate(-1060, -296)`}
+          transform={`translate(968, 302) scale(${airplaneScale}) translate(-968, -302)`}
           opacity={airplaneOpacity}
           style={{ transition: "opacity 0.05s ease-out, transform 0.05s ease-out" }}
         >
