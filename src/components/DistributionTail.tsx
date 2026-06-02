@@ -30,9 +30,7 @@ export function DistributionTail() {
       const rect = section.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // To make the animation a seamless visual continuation of the previous winding line:
-      // - Start drawing the tail line when the rocket (at the top of section-7) is fully in view (around 40% down the screen).
-      // - Finish drawing the tail line when the section is scrolled up and the paper airplane is in full view (around 20% off-screen at the top).
+      // Calibrated scroll range to start after trigger1 completes near the rocket
       const startY = vh * 0.40;
       const endY = -vh * 0.20;
 
@@ -69,28 +67,37 @@ export function DistributionTail() {
         strokeLinejoin="round"
         xmlns="http://www.w3.org/2000/svg"
       >
+        {/* Defs containing the line-art filter to transparentize the PNG background and force lines to solid black */}
+        <defs>
+          <filter id="airplane-lineart" x="0%" y="0%" width="100%" height="100%">
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.299 -0.587 -0.114 0 1"
+            />
+          </filter>
+        </defs>
+
         {/* Winding tail line */}
         <path
           ref={pathRef}
           d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 252, 980 280, 1060 296"
         />
 
-        {/* Paper airplane rendered as clean, native SVG paths */}
+        {/* Beautiful, sketched paper airplane that matches reference style perfectly. 
+            Uses scaling around connection anchor point (1060, 296) for absolute precision. */}
         <g
-          transform={`translate(1060, 296) scale(${airplaneScale}) rotate(0) translate(-5, -95)`}
+          transform={`translate(1060, 296) scale(${airplaneScale}) translate(-1060, -296)`}
           opacity={airplaneOpacity}
-          stroke="#000"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
           style={{ transition: "opacity 0.05s ease-out, transform 0.05s ease-out" }}
         >
-          <path d="M5 95 L128 18 L108 32 L125 22 L122 70 Z" />
-          <path d="M5 95 L108 32" />
-          <path d="M5 95 L122 70" />
-          <path d="M5 95 L88 60" />
-          <path d="M50 82 L108 32" />
+          <image
+            href="/airplane.png"
+            x="956"
+            y="185"
+            width="180"
+            height="131"
+            filter="url(#airplane-lineart)"
+          />
         </g>
       </svg>
     </div>
