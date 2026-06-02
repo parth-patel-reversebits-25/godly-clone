@@ -369,11 +369,20 @@ function DistributionTail() {
         {/* tail emerges from rocket area above (start sits outside viewBox so
             the line clearly comes down from the rocket trail), sweeps right
             with a gentle wave and small loop, then arrives at the airplane */}
-        <path d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 250, 980 268, 1060 260" />
-        {/* paper airplane — pointy nose lower-left, long top edge sloping
-            up-right to small notch and tail fin, right wing back-bottom, with
-            multiple fold lines fanning from nose to give the layered look */}
-        <image href="/airplane.png" x="974" y="174" width="150" height="109" />
+        <path d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 252, 980 280, 1060 296" />
+        {/* paper airplane from reference asset — bigger and shifted down so
+            the tangle-line endpoint at (1060, 296) lands on its nose tip.
+            The filter forces RGB to black and maps alpha = 1 - luminance, so
+            the white PNG background drops out and only the dark lines show. */}
+        <defs>
+          <filter id="airplane-lineart" x="0%" y="0%" width="100%" height="100%">
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.299 -0.587 -0.114 0 1"
+            />
+          </filter>
+        </defs>
+        <image href="/airplane.png" x="956" y="185" width="180" height="131" filter="url(#airplane-lineart)" />
       </svg>
     </div>
   );
