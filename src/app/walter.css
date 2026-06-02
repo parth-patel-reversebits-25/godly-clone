@@ -115,6 +115,8 @@ html.lenis, html.lenis body { height: auto; }
 .ws .section-6 .text-block { width: 100%; max-width: 390px; margin-left: 90px; }
 .ws .section-7 { padding: 340px 0 0; }
 .ws .section-7 .text-block { width: 100%; max-width: 390px; }
+.ws .section-7 .section-tail { width: 100%; margin-top: -120px; padding: 0 15px; pointer-events: none; position: relative; z-index: 1; }
+.ws .section-7 .section-tail svg { display: block; width: 100%; height: auto; overflow: visible; }
 .ws .section-8 { padding: 200px 0 100px; }
 .ws .section-8 .text-block { width: 100%; max-width: 480px; text-align: center; margin: 0 auto; }
 .ws .section-9 .columns { height: 100%; display: flex; flex-direction: column; }

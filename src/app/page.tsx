@@ -123,7 +123,9 @@ export default function Home() {
             title="Distribution"
             body="Navigating the complex world of logistics and customs to ensure timely delivery of your goods."
             svg="eleventh-img"
-          />
+          >
+            <DistributionTail />
+          </Step>
         </div>
 
         {/* ===== wrapper 2: why us, contact, form ===== */}
@@ -320,6 +322,7 @@ function Step({
   title,
   body,
   svg,
+  children,
 }: {
   section: string;
   id?: string;
@@ -328,6 +331,7 @@ function Step({
   title: string;
   body: string;
   svg: string;
+  children?: React.ReactNode;
 }) {
   return (
     <section className={section} id={id}>
@@ -344,8 +348,38 @@ function Step({
             </div>
           </div>
         </div>
+        {children}
       </div>
     </section>
+  );
+}
+
+function DistributionTail() {
+  return (
+    <div className="section-tail" aria-hidden>
+      <svg
+        viewBox="0 0 1200 360"
+        fill="none"
+        stroke="#000"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* tail emerges from rocket area above (start sits outside viewBox so
+            the line clearly comes down from the rocket trail), sweeps right
+            with a gentle wave and small loop, then arrives at the airplane */}
+        <path d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 250, 980 268, 1060 260" />
+        {/* paper airplane at end */}
+        <g transform="translate(1055 200)">
+          <path d="M2 65 L150 6 L92 60 L130 110 Z" />
+          <path d="M2 65 L92 60" />
+          <path d="M92 60 L150 6" />
+          <path d="M92 60 L130 110" />
+          <path d="M92 60 L78 78" />
+        </g>
+      </svg>
+    </div>
   );
 }
 
