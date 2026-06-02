@@ -22,7 +22,6 @@ export function DistributionTail() {
     path.style.strokeDasharray = `${len}`;
     path.style.strokeDashoffset = `${len}`;
 
-    // Target the parent section (.section-7) to track its viewport position
     const section = svg.closest(".section-7") || svg;
 
     let rafId = 0;
@@ -30,15 +29,12 @@ export function DistributionTail() {
       const rect = section.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // Calibrated scroll range to start after trigger1 completes near the rocket
-      const startY = vh * 0.40;
-      const endY = -vh * 0.20;
+      const startY = vh * 0.4;
+      const endY = -vh * 0.2;
 
       const total = startY - endY;
       const current = startY - rect.top;
       const p = Math.min(1, Math.max(0, current / total));
-
-      // Slight easing curve for high-fidelity continuation feel
       const easedP = Math.pow(p, 1.2);
 
       path.style.strokeDashoffset = `${len * (1 - easedP)}`;
@@ -51,9 +47,16 @@ export function DistributionTail() {
     return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // Fades in and scales up during the last 30% of the line drawing
+  // The airplane PNG (244×178) is rendered at SVG x=910, y=170 width=200 height=146.
+  // Nose tip in PNG is at roughly (14px, 138px) → pct (5.7%, 77.5%)
+  // SVG nose tip = (910 + 200*0.057, 170 + 146*0.775) = (921.4, 283.2)
+  // We round to (921, 283) as the line endpoint and scale anchor.
+  const NOSE_X = 921;
+  const NOSE_Y = 283;
+
   const airplaneOpacity = progress < 0.7 ? 0 : (progress - 0.7) / 0.3;
-  const airplaneScale = progress < 0.7 ? 0.4 : 0.4 + ((progress - 0.7) / 0.3) * 0.8; // scale from 0.4 to 1.2
+  const airplaneScale =
+    progress < 0.7 ? 0.5 : 0.5 + ((progress - 0.7) / 0.3) * 0.6;
 
   return (
     <div className="section-tail" aria-hidden>
@@ -67,9 +70,14 @@ export function DistributionTail() {
         strokeLinejoin="round"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Defs containing the line-art filter to transparentize the PNG background and force lines to solid black */}
         <defs>
-          <filter id="airplane-lineart" x="0%" y="0%" width="100%" height="100%">
+          <filter
+            id="airplane-lineart"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+          >
             <feColorMatrix
               type="matrix"
               values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.299 -0.587 -0.114 0 1"
@@ -77,25 +85,24 @@ export function DistributionTail() {
           </filter>
         </defs>
 
-        {/* Winding tail line ending exactly at the airplane's bottom-left nose tip (968, 302) */}
+        {/* Winding tail line — endpoint lands exactly on airplane nose tip (921, 283) */}
         <path
           ref={pathRef}
-          d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 880 252, 940 285, 968 302"
+          d="M420 10 C 470 40, 490 95, 470 145 C 450 195, 480 240, 540 250 C 620 258, 660 252, 690 254 C 712 257, 728 272, 718 282 C 706 290, 696 278, 706 268 C 720 256, 760 260, 800 256 C 860 252, 900 272, 921 283"
         />
 
-        {/* Sketched paper airplane aligned perfectly. 
-            Scaling transform centered around connection anchor point (968, 302) for absolute precision. */}
+        {/* Airplane image — x=910, y=170, width=200, height=146 so nose tip (5.7%,77.5%) = (921,283) */}
         <g
-          transform={`translate(968, 302) scale(${airplaneScale}) translate(-968, -302)`}
+          transform={`translate(${NOSE_X}, ${NOSE_Y}) scale(${airplaneScale}) translate(${-NOSE_X}, ${-NOSE_Y})`}
           opacity={airplaneOpacity}
-          style={{ transition: "opacity 0.05s ease-out, transform 0.05s ease-out" }}
+          style={{ transition: "opacity 0.04s linear" }}
         >
           <image
             href="/airplane.png"
-            x="956"
-            y="185"
-            width="180"
-            height="131"
+            x="910"
+            y="170"
+            width="200"
+            height="146"
             filter="url(#airplane-lineart)"
           />
         </g>
