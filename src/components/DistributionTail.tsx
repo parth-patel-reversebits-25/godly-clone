@@ -51,8 +51,8 @@ export function DistributionTail() {
   // Nose tip in PNG is at roughly (14px, 138px) → pct (5.7%, 77.5%)
   // SVG nose tip = (910 + 200*0.057, 170 + 146*0.775) = (921.4, 283.2)
   // We round to (921, 283) as the line endpoint and scale anchor.
-  const NOSE_X = 921;
-  const NOSE_Y = 283;
+  const NOSE_X = 1400;
+  const NOSE_Y = 445;
 
   const airplaneOpacity = progress < 0.7 ? 0 : (progress - 0.7) / 0.3;
   const airplaneScale =
